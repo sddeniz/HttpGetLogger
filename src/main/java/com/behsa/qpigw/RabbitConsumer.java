@@ -27,14 +27,14 @@ public class RabbitConsumer {
         responseRepository.save(responseMessage);
     }
 
-    @RabbitListener(queues = "saeed")
-    public void Consumer2(String message) {
-       logger.debug(message);
-    }
-
-    @RabbitListener(queues = "saeed")
-    public void Consumer3(String message) {
-        System.out.println("Received fanout 3 message: " + message);
-    }
+//    @RabbitListener(queues = "saeed")
+//    public void Consumer2(String message) {
+//       logger.debug(message);
+//    }
+//
+//    @RabbitListener(queues = "saeed")
+//    public void Consumer3(String message) {
+//        System.out.println("Received fanout 3 message: " + message);
+//    }
 }
 
