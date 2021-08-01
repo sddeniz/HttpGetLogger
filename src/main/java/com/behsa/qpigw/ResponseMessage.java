@@ -1,92 +1,130 @@
 package com.behsa.qpigw;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "tbl_request_test")
-//@NamedQuery(name="request.findAll", query="SELECT c FROM request c")
+@Table(name = "TBL_LOG_SERVICE")
+@Document(indexName = "response_message")
 public class ResponseMessage implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_request_test")
     @SequenceGenerator(name = "seq_request_test", sequenceName = "SEQ_REQUEST_TEST")
-    @Column(name = "PK_REQUEST_TEST")
-    Long Id;
-    @Column(name = "source_address")
+    @Column(name = "PK_LOG_SERVICE")
+    Long id;
 
+    @Column(name = "INS_LEVEL")
+    @Field(type = FieldType.Text, name = "level")
+    String INS_level;
 
-    String sourceAddress;
-    @Column(name = "destination_address")
+    @Column(name = "TIME")
+    @Field(type = FieldType.Text, name = "time")
+    String time;
 
+    @Column(name = "TRACE_ID")
+    @Field(type = FieldType.Text, name = "traceId")
+    String traceId;
 
-    String destinationAddress;
-    @Column(name = "http_head")
+    @Column(name = "SPAN_ID")
+    @Field(type = FieldType.Text, name = "spanId")
+    String spanId;
 
+    @Column(name = "THREAD")
+    @Field(type = FieldType.Text, name = "thread")
+    String thread;
 
-    String httpHead;
-    @Column(name = "http_body")
+    @Column(name = "CLASSS")
+    @Field(type = FieldType.Text, name = "classs")
+    String classs;
 
+    @Column(name = "MESSAGE")
+    @Field(type = FieldType.Text, name = "message")
+    String message;
 
-    String httpBody;
 
     public ResponseMessage() {
     }
 
-    public ResponseMessage(String sourceAddress, String destinationAddress, String httpHead, String httpBody) {
-        this.sourceAddress = sourceAddress;
-        this.destinationAddress = destinationAddress;
-        this.httpHead = httpHead;
-        this.httpBody = httpBody;
-    }
-
-    public String getSourceAddress() {
-        return sourceAddress;
-    }
-
-    public void setSourceAddress(String sourceAddress) {
-        this.sourceAddress = sourceAddress;
-    }
-
-    public String getDestinationAddress() {
-        return destinationAddress;
-    }
-
-    public void setDestinationAddress(String destinationAddress) {
-        this.destinationAddress = destinationAddress;
-    }
-
-    public String getHttpHead() {
-        return httpHead;
-    }
-
-    public void setHttpHead(String httpHead) {
-        this.httpHead = httpHead;
-    }
-
-    public String getHttpBody() {
-        return httpBody;
-    }
-
-    public void setHttpBody(String httpBody) {
-        this.httpBody = httpBody;
-    }
-
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
+    }
+
+    public String getINS_level() {
+        return INS_level;
+    }
+
+    public void setINS_level(String INS_level) {
+        this.INS_level = INS_level;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getTraceId() {
+        return traceId;
+    }
+
+    public void setTraceId(String traceId) {
+        this.traceId = traceId;
+    }
+
+    public String getSpanId() {
+        return spanId;
+    }
+
+    public void setSpanId(String spanId) {
+        this.spanId = spanId;
+    }
+
+    public String getThread() {
+        return thread;
+    }
+
+    public void setThread(String thread) {
+        this.thread = thread;
+    }
+
+    public String getClasss() {
+        return classs;
+    }
+
+    public void setClasss(String classs) {
+        this.classs = classs;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override
     public String toString() {
-        return "RequestMessage{" +
-                "Id=" + Id +
-                ", sourceAddress='" + sourceAddress + '\'' +
-                ", destination_address='" + destinationAddress + '\'' +
-                ", http_head='" + httpHead + '\'' +
-                ", http_body='" + httpBody + '\'' +
+        return "ResponseMessage{" +
+                "id=" + id +
+                ", INS_level='" + INS_level + '\'' +
+                ", time='" + time + '\'' +
+                ", traceId='" + traceId + '\'' +
+                ", spanId='" + spanId + '\'' +
+                ", thread='" + thread + '\'' +
+                ", classs='" + classs + '\'' +
+                ", message='" + message + '\'' +
                 '}';
     }
 }

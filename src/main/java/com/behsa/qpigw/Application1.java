@@ -7,11 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @SpringBootApplication
-public class Application implements CommandLineRunner {
+public class Application1 implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication springApplication =
                 new SpringApplicationBuilder()
-                        .sources(Application.class)
+                        .sources(Application1.class)
                         .web(WebApplicationType.NONE)
                         .build();
 

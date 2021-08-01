@@ -2,19 +2,20 @@ package com.behsa.qpigw.config;
 
 
 import com.google.gson.Gson;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 @Configuration
+@EnableElasticsearchRepositories("com.behsa.qpigw.elasticsearch")
+@EnableJpaRepositories("com.behsa.qpigw.jpa")
 public class BeanConfig {
     @Value("${exchange.name}")
     private String exchangeName;
@@ -27,18 +28,18 @@ public class BeanConfig {
 
     @Bean("saeed")
     Queue queueRequest() {
-        return new Queue(queueNameConsumer, false);
+        return new Queue(queueNameConsumer, true);
     }
 
     @Bean
-    DirectExchange getDirectExchange() {
-        return new DirectExchange(exchangeName, true, false);
+    FanoutExchange getExchange() {
+        return new FanoutExchange(exchangeName, true, false);
     }
 
 
     @Bean
-    Binding bindingRequest(@Qualifier("saeed") Queue queueRequest, DirectExchange exchange) {
-        return BindingBuilder.bind(queueRequest).to(exchange).with(routineKeyBind);
+    Binding bindingRequest(@Qualifier("saeed") Queue queueRequest, FanoutExchange exchange) {
+        return BindingBuilder.bind(queueRequest).to(exchange);
     }
 
     @Bean
